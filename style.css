@@ -64,7 +64,7 @@ input{
 	gap: 10px;
 	justify-content: space-between;
 }
-.red{
+.delete{
 	background-color: red;
 	width: 112px;
 

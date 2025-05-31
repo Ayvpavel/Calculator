@@ -18,6 +18,7 @@ const button8 = document.querySelector('.eight');
 const button9 = document.querySelector('.nine');
 const button0 = document.querySelector('.zero');
 const point = document.querySelector('.point');
+const buttonDelete = document.querySelector('.delete');
 let inputText = '';
 let isResetMinus = false;
 
@@ -69,6 +70,18 @@ button0.onclick = function () {
 point.onclick = function () {
   insertValue('.');
 };
+
+input.oninput = function () {
+  console.log(input.value);
+  console.log(typeof input.value);
+  let value = input.value;
+  let lastElement = value[value.length - 1];
+  console.log(lastElement);
+  if (isNaN(Number(lastElement))) {
+    input.value = value.slice(0, value.length - 1);
+  }
+};
+
 submitBtn.onclick = function () {
   if (countSubmit == 1) {
     return;
@@ -183,4 +196,8 @@ divisionBtn.onclick = function () {
   action = '/';
   countSubmit = 0;
   inputText = '';
+};
+buttonDelete.onclick = function () {
+  input.value = 0;
+  console.log('1');
 };
