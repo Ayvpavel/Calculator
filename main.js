@@ -81,6 +81,12 @@ input.oninput = function () {
     input.value = value.slice(0, value.length - 1);
   }
 };
+buttonDelete.onclick = function () {
+  input.value = '';
+  console.log('1');
+  sum = 0;
+  inputText = '';
+};
 
 submitBtn.onclick = function () {
   if (countSubmit == 1) {
@@ -196,8 +202,4 @@ divisionBtn.onclick = function () {
   action = '/';
   countSubmit = 0;
   inputText = '';
-};
-buttonDelete.onclick = function () {
-  input.value = 0;
-  console.log('1');
 };
