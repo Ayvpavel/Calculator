@@ -4,9 +4,6 @@ const plusBtn = document.getElementById(`plus`);
 const minusBtn = document.getElementById(`minus`);
 const divisionBtn = document.getElementById(`division`);
 const multiplicationBtn = document.getElementById(`multiplication`);
-let sum = 0;
-let action = ' ';
-let countSubmit = 0;
 const button1 = document.querySelector('.one');
 const button2 = document.querySelector('.two');
 const button3 = document.querySelector('.three');
@@ -19,187 +16,173 @@ const button9 = document.querySelector('.nine');
 const button0 = document.querySelector('.zero');
 const point = document.querySelector('.point');
 const buttonDelete = document.querySelector('.delete');
+const calcMethods = { '/': '/', '*': '*', '-': '-', '+': '+' };
 let inputText = '';
-let isResetMinus = false;
+let sum = 0;
+let resetSubmit = false;
 
-function insertValue(number) {
-  inputText = inputText + number;
+buttonDelete.onclick = function () {
+  sum = 0;
+  inputText = '';
+  input.value = '';
+};
+
+function insertValue(a) {
+  inputText = inputText + a;
   input.value = inputText;
 }
-
 button1.onclick = function () {
   insertValue('1');
+  formatInput();
 };
 
 button2.onclick = function () {
   insertValue('2');
+  formatInput();
 };
 
 button3.onclick = function () {
   insertValue('3');
+  formatInput();
 };
 
 button4.onclick = function () {
   insertValue('4');
+  formatInput();
 };
 
 button5.onclick = function () {
   insertValue('5');
+  formatInput();
 };
 
 button6.onclick = function () {
   insertValue('6');
+  formatInput();
 };
 
 button7.onclick = function () {
   insertValue('7');
+  formatInput();
 };
 
 button8.onclick = function () {
   insertValue('8');
+  formatInput();
 };
 
 button9.onclick = function () {
   insertValue('9');
+  formatInput();
 };
 
 button0.onclick = function () {
   insertValue('0');
+  formatInput();
 };
 
 point.onclick = function () {
   insertValue('.');
-};
-
-input.oninput = function () {
-  console.log(input.value);
-  console.log(typeof input.value);
-  let value = input.value;
-  let lastElement = value[value.length - 1];
-  console.log(lastElement);
-  if (isNaN(Number(lastElement))) {
-    input.value = value.slice(0, value.length - 1);
-  }
-};
-buttonDelete.onclick = function () {
-  input.value = '';
-  console.log('1');
-  sum = 0;
-  inputText = '';
-};
-
-submitBtn.onclick = function () {
-  if (countSubmit == 1) {
-    return;
-  }
-  countSubmit = countSubmit + 1;
-
-  if (action == '-') {
-    let value = input.value;
-
-    if (value !== '') {
-      sum = sum - Number(value);
-    }
-    input.value = sum;
-    console.log(sum, 'минус равно');
-  }
-  if (action == '+') {
-    sum = Number(input.value) + sum;
-    input.value = sum;
-  }
-
-  if (action == '*') {
-    let value = input.value;
-    if (value !== '') {
-      sum = Number(input.value) * sum;
-    }
-    input.value = sum;
-    sum = 1;
-    SumMult = 1;
-  }
-  if (action == '/') {
-    let value = input.value;
-    if (value !== '') {
-      sum = sum / Number(input.value);
-    }
-    input.value = sum;
-    sum = 1;
-    SumDivision = 1;
-  }
-
-  if (action == '+') {
-    sum = 0;
-  }
-  if (action == '-') {
-    sum = 0;
-    isResetMinus = true;
-  }
-  if (action == '*') {
-    sum = 1;
-  }
-  if (action == '/') {
-    sum = 1;
-  }
+  formatInput();
 };
 
 plusBtn.onclick = function () {
-  action = '+';
-  if (input.value !== '') {
-    console.log(sum, 'sum');
-    console.log(input.value, 'value');
-    sum = Number(input.value) + sum;
-  }
-  input.value = '';
-  countSubmit = 0;
-  inputText = '';
+  insertValue('+');
+  formatInput();
 };
 
-let countClickMinus = 0;
 minusBtn.onclick = function () {
-  countClickMinus++;
-  // debugger;
-  if (input.value !== '') {
-    if (countClickMinus > 1 && isResetMinus == false) {
-      sum = sum - Number(input.value);
-    } else {
-      sum = Number(input.value) - sum;
-      console.log('click');
-    }
-  }
-
-  input.value = '';
-  action = '-';
-  countSubmit = 0;
-  inputText = '';
-  isResetMinus = false;
-};
-let SumMult = 1;
-multiplicationBtn.onclick = function () {
-  if (input.value !== '') {
-    sum = Number(input.value) * SumMult;
-    SumMult = sum;
-  }
-  input.value = '';
-  action = '*';
-  countSubmit = 0;
-  inputText = '';
+  insertValue('-');
+  formatInput();
 };
 
-let SumDivision = 1;
-let countClickDiv = 0;
 divisionBtn.onclick = function () {
-  countClickDiv++;
-  if (input.value !== '') {
-    if (countClickDiv > 1) {
-      sum = SumDivision / input.value;
-    } else {
-      sum = Number(input.value) / SumDivision;
+  insertValue('/');
+  formatInput();
+};
+
+multiplicationBtn.onclick = function () {
+  insertValue('*');
+  formatInput();
+};
+
+function formatInput() {
+  let value = input.value;
+  let lastElement = value[value.length - 1];
+
+  if (isNaN(Number(lastElement)) && !calcMethods[lastElement]) {
+    input.value = value.slice(0, value.length - 1);
+  }
+
+  if (calcMethods[lastElement]) {
+    let arrayValue = input.value.split('');
+
+    arrayValue.splice(arrayValue.length - 1, 0, ' ');
+
+    arrayValue.splice(arrayValue.length, 0, ' ');
+
+    if (
+      calcMethods[lastElement] &&
+      calcMethods[value[value.length - 3]] &&
+      value[value.length - 3] !== undefined
+    ) {
+      arrayValue.splice(arrayValue.length - 5, 3);
+
+      input.value = arrayValue.join('');
+      inputText = arrayValue.join('');
+      return;
     }
 
-    SumDivision = sum;
+    input.value = arrayValue.join('');
   }
-  input.value = '';
-  action = '/';
-  countSubmit = 0;
-  inputText = '';
+
+  inputText = input.value;
+  resetSubmit = false;
+}
+
+submitBtn.onclick = function () {
+  if (resetSubmit === true) {
+    return;
+  }
+  sum = 0;
+
+  let displayValue = input.value.split(' ');
+
+  for (let i = 0; i < displayValue.length; i++) {
+    //plus
+    if (displayValue[i] === '+') {
+      if (sum == 0) {
+        sum = +displayValue[i - 1] + +displayValue[i + 1];
+      } else {
+        sum = +sum + +displayValue[i + 1];
+      }
+    }
+    //minus
+    if (displayValue[i] === '-') {
+      if (sum == 0) {
+        sum = +displayValue[i - 1] - +displayValue[i + 1];
+      } else {
+        sum = +sum - +displayValue[i + 1];
+      }
+    }
+    //multi
+    if (displayValue[i] === '*') {
+      if (sum == 0) {
+        sum = +displayValue[i - 1] * +displayValue[i + 1];
+      } else {
+        sum = +sum * +displayValue[i + 1];
+      }
+    }
+    //division
+    if (displayValue[i] === '/') {
+      if (sum == 0) {
+        sum = +displayValue[i - 1] / +displayValue[i + 1];
+      } else {
+        sum = +sum / +displayValue[i + 1];
+      }
+    }
+  }
+  input.value = sum;
+  inputText = sum;
+  resetSubmit = true;
 };
