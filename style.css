@@ -34,7 +34,7 @@ ul li{list-style: none;}
 img{vertical-align: top;}
 
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
-.calculator{
+.calculator {
 	width: 500px;
 	background-color: aqua;
 	margin: 0 auto;
@@ -43,19 +43,42 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	border: 1px solid black;
 	padding: 10px;
 	gap: 10px;
+	border-radius: 15px;
+	margin-top: 20px;
 	
 
 }
-button{
+body{
+	background-color:#f0f2f5;
+}
+button {
+transition: all 0.3s ease;
 	width: 50%;
 	height: 30px;
-	box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-	border-radius: 5px;
+    border-radius: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: #e0e0e0;
 }
+
+button:hover{
+	
+transform: scale(1.1);
+		box-shadow: 4px 4px 8px 8px rgba(7, 120, 206, 0.2);
+		font-size: 25px;
+		
+}
+
+.equals{
+	background-color: #28c76f;
+
+}
+
 input{
-	width: 50%;
+	width: 100%;
 	box-shadow: 4px 4px 8px 4px rgba(0, 8, 14, 0.2);
 	border-radius: 5px;
+	background-color: #f9f9f9;
 }
 .wrapper{
 	display:flex ;
@@ -66,15 +89,23 @@ input{
 }
 .delete{
 	background-color: red;
-	width: 112px;
+	width: 150px;
+	font-size: 20px;
 
 }
 .ressult{
 	border-radius: 5px color red;
 	width: 45px;
 	border: 2px color black;
+	
 }
 .resultt{
+	font-size: 25px;
+}
+input{
+	font-size: 18px;
+	color: #333;
+		font-weight: bold;	
 
-	font-size: 10px;
+	
 }
