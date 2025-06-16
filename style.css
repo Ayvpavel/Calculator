@@ -93,15 +93,13 @@ input{
 	font-size: 20px;
 
 }
-.ressult{
+.result{
 	border-radius: 5px color red;
 	width: 45px;
 	border: 2px color black;
 	
 }
-.resultt{
-	font-size: 25px;
-}
+
 input{
 	font-size: 18px;
 	color: #333;

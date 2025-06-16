@@ -16,7 +16,7 @@ const button9 = document.querySelector('.nine');
 const button0 = document.querySelector('.zero');
 const point = document.querySelector('.point');
 const buttonDelete = document.querySelector('.delete');
-const calcMethods = { '/': '/', '*': '*', '-': '-', '+': '+'};
+const calcMethods = { '/': '/', '*': '*', '-': '-', '+': '+' };
 let inputText = '';
 let sum = 0;
 let resetSubmit = false;
@@ -109,8 +109,17 @@ multiplicationBtn.onclick = function () {
 function formatInput() {
   let value = input.value;
   let lastElement = value[value.length - 1];
-
-  if (isNaN(Number(lastElement)) && !calcMethods[lastElement] && lastElement !== '.') {
+  // debugger;
+  if (value.includes('Ошибка')) {
+    sum = '';
+    inputText = '';
+    input.value = value.slice(6);
+  }
+  if (
+    isNaN(Number(lastElement)) &&
+    !calcMethods[lastElement] &&
+    lastElement !== '.'
+  ) {
     input.value = value.slice(0, value.length - 1);
   }
 
@@ -181,6 +190,9 @@ submitBtn.onclick = function () {
         sum = +sum / +displayValue[i + 1];
       }
     }
+  }
+  if (isNaN(sum)) {
+    sum = 'Ошибка';
   }
   input.value = sum;
   inputText = sum;
