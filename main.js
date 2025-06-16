@@ -16,6 +16,8 @@ const button9 = document.querySelector('.nine');
 const button0 = document.querySelector('.zero');
 const point = document.querySelector('.point');
 const buttonDelete = document.querySelector('.delete');
+const buttonCleaning = document.querySelector('.cleaning');
+
 const calcMethods = { '/': '/', '*': '*', '-': '-', '+': '+' };
 let inputText = '';
 let sum = 0;
@@ -27,6 +29,13 @@ buttonDelete.onclick = function () {
   input.value = '';
 };
 
+buttonCleaning.onclick = function () {
+  debugger;
+  if (input.value !== '') {
+    inputText = input.value.slice(0, -1);
+    input.value = inputText;
+  }
+};
 function insertValue(a) {
   inputText = inputText + a;
   input.value = inputText;
@@ -109,7 +118,6 @@ multiplicationBtn.onclick = function () {
 function formatInput() {
   let value = input.value;
   let lastElement = value[value.length - 1];
-  // debugger;
   if (value.includes('Ошибка')) {
     sum = '';
     inputText = '';

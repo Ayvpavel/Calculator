@@ -89,9 +89,12 @@ input{
 }
 .delete{
 	background-color: red;
-	width: 150px;
+	width: 180px;
 	font-size: 20px;
 
+}
+.cleaning{
+	width: 180px;
 }
 .result{
 	border-radius: 5px color red;
@@ -103,7 +106,9 @@ input{
 input{
 	font-size: 18px;
 	color: #333;
-		font-weight: bold;	
+	font-weight: bold;	
+	width: 300px;
+	min-width: 300px;
 
 	
 }
