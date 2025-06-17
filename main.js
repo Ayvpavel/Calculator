@@ -30,11 +30,13 @@ buttonDelete.onclick = function () {
 };
 
 buttonCleaning.onclick = function () {
-  debugger;
-  if (input.value !== '') {
+  if (input.value !== '' && calcMethods[input.value - 1]) {
+
     inputText = input.value.slice(0, -1);
     input.value = inputText;
   }
+  else { inputText = input.value.slice(0, -2);
+    input.value = inputText;}
 };
 function insertValue(a) {
   inputText = inputText + a;
