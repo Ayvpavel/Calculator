@@ -30,13 +30,14 @@ buttonDelete.onclick = function () {
 };
 
 buttonCleaning.onclick = function () {
-  if (input.value !== '' && calcMethods[input.value - 1]) {
+  const lastChar = input.value.slice(-1);
 
-    inputText = input.value.slice(0, -1);
-    input.value = inputText;
+  if (lastChar === ' ') {
+    input.value = input.value.slice(0, -3);
+  } else {
+    input.value = input.value.slice(0, -1);
   }
-  else { inputText = input.value.slice(0, -2);
-    input.value = inputText;}
+  inputText = input.value;
 };
 function insertValue(a) {
   inputText = inputText + a;
