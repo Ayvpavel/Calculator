@@ -4,35 +4,35 @@ const plusBtn = document.getElementById(`plus`);
 const minusBtn = document.getElementById(`minus`);
 const divisionBtn = document.getElementById(`division`);
 const multiplicationBtn = document.getElementById(`multiplication`);
-const button1 = document.querySelector('.one');
-const button2 = document.querySelector('.two');
-const button3 = document.querySelector('.three');
-const button4 = document.querySelector('.four');
-const button5 = document.querySelector('.five');
-const button6 = document.querySelector('.six');
-const button7 = document.querySelector('.seven');
-const button8 = document.querySelector('.eight');
-const button9 = document.querySelector('.nine');
-const button0 = document.querySelector('.zero');
-const point = document.querySelector('.point');
-const buttonDelete = document.querySelector('.delete');
-const buttonCleaning = document.querySelector('.cleaning');
+const button1 = document.querySelector(".one");
+const button2 = document.querySelector(".two");
+const button3 = document.querySelector(".three");
+const button4 = document.querySelector(".four");
+const button5 = document.querySelector(".five");
+const button6 = document.querySelector(".six");
+const button7 = document.querySelector(".seven");
+const button8 = document.querySelector(".eight");
+const button9 = document.querySelector(".nine");
+const button0 = document.querySelector(".zero");
+const point = document.querySelector(".point");
+const buttonDelete = document.querySelector(".delete");
+const buttonCleaning = document.querySelector(".cleaning");
+const calcMethods = { "/": "/", "*": "*", "-": "-", "+": "+" };
 
-const calcMethods = { '/': '/', '*': '*', '-': '-', '+': '+' };
-let inputText = '';
+let inputText = "";
 let sum = 0;
 let resetSubmit = false;
 
 buttonDelete.onclick = function () {
   sum = 0;
-  inputText = '';
-  input.value = '';
+  inputText = "";
+  input.value = "";
 };
 
 buttonCleaning.onclick = function () {
   const lastChar = input.value.slice(-1);
 
-  if (lastChar === ' ') {
+  if (lastChar === " ") {
     input.value = input.value.slice(0, -3);
   } else {
     input.value = input.value.slice(0, -1);
@@ -44,102 +44,103 @@ function insertValue(a) {
   input.value = inputText;
 }
 button1.onclick = function () {
-  insertValue('1');
+  insertValue("1");
   formatInput();
 };
 
 button2.onclick = function () {
-  insertValue('2');
+  insertValue("2");
   formatInput();
 };
 
 button3.onclick = function () {
-  insertValue('3');
+  insertValue("3");
   formatInput();
 };
 
 button4.onclick = function () {
-  insertValue('4');
+  insertValue("4");
   formatInput();
 };
 
 button5.onclick = function () {
-  insertValue('5');
+  insertValue("5");
   formatInput();
 };
 
 button6.onclick = function () {
-  insertValue('6');
+  insertValue("6");
   formatInput();
 };
 
 button7.onclick = function () {
-  insertValue('7');
+  insertValue("7");
   formatInput();
 };
 
 button8.onclick = function () {
-  insertValue('8');
+  insertValue("8");
   formatInput();
 };
 
 button9.onclick = function () {
-  insertValue('9');
+  insertValue("9");
   formatInput();
 };
 
 button0.onclick = function () {
-  insertValue('0');
+  insertValue("0");
   formatInput();
 };
 
 point.onclick = function () {
-  insertValue('.');
+  insertValue(".");
   formatInput();
 };
 
 plusBtn.onclick = function () {
-  insertValue('+');
+  insertValue("+");
   formatInput();
 };
 
 minusBtn.onclick = function () {
-  insertValue('-');
+  insertValue("-");
   formatInput();
 };
 
 divisionBtn.onclick = function () {
-  insertValue('/');
+  insertValue("/");
   formatInput();
 };
 
 multiplicationBtn.onclick = function () {
-  insertValue('*');
+  insertValue("*");
   formatInput();
 };
 
 function formatInput() {
+  // debugger;
   let value = input.value;
   let lastElement = value[value.length - 1];
-  if (value.includes('Ошибка')) {
-    sum = '';
-    inputText = '';
+  if (value.includes("Ошибка")) {
+    sum = "";
+    inputText = "";
     input.value = value.slice(6);
   }
   if (
     isNaN(Number(lastElement)) &&
     !calcMethods[lastElement] &&
-    lastElement !== '.'
+    lastElement !== "."
   ) {
     input.value = value.slice(0, value.length - 1);
   }
-
   if (calcMethods[lastElement]) {
-    let arrayValue = input.value.split('');
+    let arrayValue = input.value.split("");
+    console.log("Формат");
 
-    arrayValue.splice(arrayValue.length - 1, 0, ' ');
+    arrayValue.splice(arrayValue.length - 1, 0, " ");
 
-    arrayValue.splice(arrayValue.length, 0, ' ');
+    arrayValue.splice(arrayValue.length, 0, " ");
 
     if (
       calcMethods[lastElement] &&
@@ -148,29 +149,44 @@ function formatInput() {
     ) {
       arrayValue.splice(arrayValue.length - 5, 3);
 
-      input.value = arrayValue.join('');
-      inputText = arrayValue.join('');
+      input.value = arrayValue.join("");
+      inputText = arrayValue.join("");
       return;
     }
 
-    input.value = arrayValue.join('');
+    input.value = arrayValue.join("");
   }
 
   inputText = input.value;
   resetSubmit = false;
 }
 
-submitBtn.onclick = function () {
+input.oninput = function () {
+  let text = input.value;
+  let result = "";
+  console.log(text);
+  formatInput();
+  if (input.value !== result) {
+    // input.value = result;
+  }
+  let lastElement = text[text.length - 1];
+  if (lastElement == "=") {
+    submitfunction();
+  }
+  console.log(result);
+};
+submitBtn.onclick = submitfunction;
+function submitfunction() {
   if (resetSubmit === true) {
     return;
   }
-  sum = '';
+  sum = "";
 
-  let displayValue = input.value.split(' ');
+  let displayValue = input.value.split(" ");
 
   for (let i = 0; i < displayValue.length; i++) {
     //plus
-    if (displayValue[i] === '+') {
+    if (displayValue[i] === "+") {
       if (sum == 0) {
         sum = +displayValue[i - 1] + +displayValue[i + 1];
       } else {
@@ -178,7 +194,7 @@ submitBtn.onclick = function () {
       }
     }
     //minus
-    if (displayValue[i] === '-') {
+    if (displayValue[i] === "-") {
       if (sum == 0) {
         sum = +displayValue[i - 1] - +displayValue[i + 1];
       } else {
@@ -186,7 +202,7 @@ submitBtn.onclick = function () {
       }
     }
     //multi
-    if (displayValue[i] === '*') {
+    if (displayValue[i] === "*") {
       if (sum == 0) {
         sum = +displayValue[i - 1] * +displayValue[i + 1];
       } else {
@@ -194,7 +210,7 @@ submitBtn.onclick = function () {
       }
     }
     //division
-    if (displayValue[i] === '/') {
+    if (displayValue[i] === "/") {
       if (sum == 0) {
         sum = +displayValue[i - 1] / +displayValue[i + 1];
       } else {
@@ -203,9 +219,9 @@ submitBtn.onclick = function () {
     }
   }
   if (isNaN(sum)) {
-    sum = 'Ошибка';
+    sum = "Ошибка";
   }
   input.value = sum;
   inputText = sum;
   resetSubmit = true;
-};
+}
